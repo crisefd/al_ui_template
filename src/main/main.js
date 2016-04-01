@@ -2,7 +2,7 @@
  * Configuration for pathing for requireJS to include modules
  *
  * @module RequireJS
- * 
+ *
  * @requires config/config
  *
  * @author Barry Skidmore <bskidmore@alertlogic.com>
@@ -31,7 +31,7 @@
             }
             catch( e )
             {
-                console.error("Caught an error during bootstrap: %s", e.message );
+                console.error("Caught an error during bootstrap: %s", e.message);
             }
 
         });

@@ -1,4 +1,4 @@
-define( [ 'angular' ], 
+define( [ 'angular' ],
         function(angular) {
            'use strict';
 
@@ -10,7 +10,7 @@ define( [ 'angular' ],
              * facilitate the inclusion for objects stored in idiosyncratic locations.
              */
             config.standardRequireModules = [   'angular', 'ngAnimate', 'ui.bootstrap', 'angular-ui-utils',
-                                                'ngSanitize', 'ui.select', 'ngRoute', 'gettext', 'app', 
+                                                'ngSanitize', 'ui.select', 'ngRoute', 'gettext', 'app',
                                                 'LocalStorageModule', 'angulartics', 'angulartics-ga',
                                                 ];
 
@@ -47,7 +47,7 @@ define( [ 'angular' ],
             config.taskRefreshFrequency = 5;
 
             /**
-             * The RoutingTable allows individual webserbices to be directed to specific endpoints.  
+             * The RoutingTable allows individual webserbices to be directed to specific endpoints.
              * To change the root path for constructing URLs against yarp, add a _default key as follows:
              *
              *     _default: { url: "alternate-base-path/"; }
@@ -62,14 +62,14 @@ define( [ 'angular' ],
             /**
              * This is the default require configuration.  Note that putting this in the main configuration file means
              * that the location of non-"standard" (i.e., not in standardRequireModules above) can be maintained in
-             * a single location without the need for synchronization across many applications. 
+             * a single location without the need for synchronization across many applications.
              *
              * Also of significance: baseUrl MUST refer to root in order to support normalized pathing across all
              * sub-applications.  For applications outside of the root folder, add an 'app' entry to path referring
              * to the location of the correct app module.
              */
             config.requireConfiguration = {
-                baseUrl: "/",   
+                baseUrl: "/",
                 paths: {
                     'angular': 'vendor/angular/angular.min',
                     'ngAnimate': 'vendor/angular-animate/angular-animate.min',
