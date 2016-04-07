@@ -54,3 +54,5 @@ src/main/doc
 src/main/css/app.css
 src/main/translations.js
 po/template.pot
+
+git-hooks
