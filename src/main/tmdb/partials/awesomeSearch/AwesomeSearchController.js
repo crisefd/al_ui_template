@@ -27,7 +27,7 @@ define( [ 'angular',
           var config    = angular.module("config");
           $scope.view   = {
               searchPhrase: "",
-              resultList: [],
+              resultlist: [],
               images: config.apiImg
           };
           var api = TMDBAPIService.Search();
