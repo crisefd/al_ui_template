@@ -12,6 +12,7 @@ var uglifyjs      = require('uglify-js');
 var replaceStream = require('replacestream')
 var pkg           = require('../package.json');
 var base          = pkg.folders.jsSource;
+console.log("base = " + base);
 var sourceBasePath = pkg.folders.jsSource.replace(/\/+$/,'');       /*  no trailing slash, thank you */
 
 var deploy        = pkg.folders.build + pkg.name + '-' + pkg.version + '/';

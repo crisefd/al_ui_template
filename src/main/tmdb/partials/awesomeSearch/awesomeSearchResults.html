@@ -1,7 +1,17 @@
 <div>
   <ul>
-    <li ng-repeat="result in view.resultlist">
+    <li ng-repeat="match in view.resultList">
       <span class="badge" >{{result.media_type}}</span>
-      <a href={{result.name || result.title}}</a></li>
+       <a ng-if="match.media_type === 'movie' && match.poster_path" href="#/movie/{{ match.id }}">
+            <div style="margin-bottom: 2px; margin-top: 2px;">
+                <img ng-if="match.poster_path" src="{{view.images}}{{ match.poster_path }}" style="width: 25px; margin-right: 10px;" />{{ match.title }}
+            </div>
+        </a>
+        <a ng-if="match.media_type === 'person' && match.profile_path" href="#/person/{{ match.id }}">
+            <div style="margin-bottom: 2px; margin-top: 2px;">
+                <img src="{{view.images}}{{ match.profile_path }}" style="width: 25px; margin-right: 10px;" />{{ match.name }}
+            </div>
+        </a>
+      <!--<a href={{result.name || result.title}}</a></li>-->
   </ul>
 </div>

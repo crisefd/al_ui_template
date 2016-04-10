@@ -27,7 +27,7 @@ define( [ 'angular',
           var config    = angular.module("config");
           $scope.view   = {
               searchPhrase: "",
-              resultlist: [],
+              resultList: [],
               images: config.apiImg
           };
           var api = TMDBAPIService.Search();
@@ -37,16 +37,17 @@ define( [ 'angular',
           };
           self.applyQuery = function() {
               if ( $scope.view.searchPhrase.length >= 2 ) {
-                  api.search.multi($scope.view.searchPhrase).then( function ( response ) {
-                      $scope.view.resultlist = response.data.results;
-                  });
+                  api.search.multi($scope.view.searchPhrase)
+                    .then( function ( response ) {
+                        $scope.view.resultList = response.data.results;
+                    });
               } else {
-                  $scope.view.resultlist = [];
+                  $scope.view.resultList = [];
               }
           };
           $scope.$on( '$routeChangeSuccess', function() {
               $scope.view.searchPhrase = "";
-              $scope.view.resultlist = [];
+              $scope.view.resultList = [];
           });
 
       };

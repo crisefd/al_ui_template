@@ -27,7 +27,7 @@ define( [ 'angular',
                 templateUrl: '/tmdb/partials/awesomeSearch/awesomeSearchResults.html',
                 restrict: 'E',
                 scope: {
-                    castList: '=ngModel'
+                    view: '=ngModel'
                 }
             };
         };
