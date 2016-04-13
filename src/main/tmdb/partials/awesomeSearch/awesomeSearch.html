@@ -1,15 +1,21 @@
 <div class="container">
 	<div class="row">
-      <div id="awesome-search-input">
-				<a href="#/" title="Start Over"><h2>Awesome TMDB App</h2></a>
+      <div class="awesome-search-input">
+				<div class="col-xs-6  col-md-3">
+					<h2>
+					<!--<span href="#/" title="Start Over">Awesome TMDB App</span>-->
+					<span class="label label-default"><a ng-href="#/">Awesome TMDB App</a>
+					</span>
+					<h2>
+				</div>
         <div class="input-group col-md-12">
           <input type="text" class="search-query form-control"
-             placeholder="Search by Movie, Show, Actor, Actress, Company,..."
+             placeholder="Search by Movie, Show,..."
 						 name="searchPhrase" id="searchPhrase" class="form-control pull-right"
 						 ng-model="view.searchPhrase" ng-change="search()" />
             <span class="input-group-btn">
               <button class="btn btn-default" type="button">
-                <span class="glyphicon glyphicon-search text-muted"></span>
+                <span class="glyphicon glyphicon-search"></span>
               </button>
            </span>
       </div>
