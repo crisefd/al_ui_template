@@ -29,10 +29,13 @@ define( [ 'angular',
 
             var searchPromise;
 
-            $scope.searchPhrase = "";
+            $scope.view = {
+              searchPhrase: "",
+              resultList: []
+            };
 
-            $scope.$watch('searchPhrase',function(newValue,oldValue){
-                
+            $scope.$watch('view.searchPhrase',function(newValue,oldValue){
+
                 $timeout.cancel(searchPromise);
 
                 searchPromise = $timeout(function(){
@@ -50,33 +53,33 @@ define( [ 'angular',
 
 
             $scope.performSearch = function(event) {
-                if (event.which === 13) {
-                    self.search();
-                }
-            }
+                // if (event.which === 13) {
+                //     self.search();
+                // }
+            };
 
             /**
             * Call the API with the search phrase
             */
             self.search = function(){
-                apiSearch.search.multi($scope.searchPhrase).then(function(response){
-                    $scope.searchResults = response.data.results;
+                apiSearch.search.multi($scope.view.searchPhrase).then(function(response){
+                    $scope.view.resultList = response.data.results;
 
-                    $scope.searchResults.forEach(function(item){
+                    $scope.view.resultList.forEach(function(item){
                         if (item.media_type === "person") {
-                            // Get images for persons 
+                            // Get images for persons
                             apiPerson.person.person(item.id).then( function(r) {
-                                item.foto = r.data.profile_path;
+                                item.image = r.data.profile_path;
                                 console.log(r.data.profile_path);
                             });
                         }
                         else {
-                            item.foto = item.poster_path;
+                            item.image = item.poster_path;
                         }
                     });
 
                 });
-            }
+            };
 
         };
 
