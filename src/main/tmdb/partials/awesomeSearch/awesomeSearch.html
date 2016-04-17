@@ -1,18 +1,20 @@
-<div class="awesome-search">
-	<div class="header">
-			Awesome TMDB App
+	<div class="awesome-search">
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="header">
+					Awesome TMDB App
+			</div>
+			<div class="input-group">
+				<input type="text" ng-keypress="performSearch($event)"
+				class="form-control" placeholder="Search Movie, Actor, Company..."
+				ng-model="view.searchPhrase" />
+				<span class="input-group-btn">
+		      <button class="btn btn-default" type="button">
+		          <span class="glyphicon glyphicon-search"></span>
+		      </button>
+		    </span>
+		 </div>
+	 </nav>
+		<div class="bodyarea">
+			<awesome-search-results ng-model="view.resultList" />
+		</div>
 	</div>
-	<div class="input-group">
-		<input type="text" ng-keypress="performSearch($event)"
-		class="form-control" placeholder="Search Movie, Actor, Company..."
-		ng-model="view.searchPhrase" />
-		<span class="input-group-btn">
-      <button class="btn btn-default" type="button">
-          <span class="glyphicon glyphicon-search"></span>
-      </button>
-    </span>
- </div>
-	<div class="bodyarea">
-		<awesome-search-results ng-model="view.resultList" />
-	</div>
-</div>
