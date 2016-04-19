@@ -4,17 +4,20 @@
 			<div class="header">
 					Awesome TMDB App
 			</div>
-			<div class="input-group">
+			<div class="input-group col-md-4">
 				<input type="text" ng-keypress="performSearch($event)"
 				class="form-control" placeholder="Search Movie, Actor, Company..."
 				ng-model="view.searchPhrase" />
-				<span class="input-group-btn">
-		      <button class="btn btn-default" type="button">
-		          <span class="glyphicon glyphicon-search"></span>
-		      </button>
-		    </span>
+				<div class="input-group-addon">
+		      <!--<button class="btn btn-default" type="button">-->
+		          <span class="glyphicon glyphicon-asterisk"></span>
+		      <!--</button>-->
+		    </div>
+		    
 		 </div>
 	 </nav>
 		<div class="bodyarea">
 			<awesome-search-results ng-model="view.resultList" />
-	</div>
+		</div>
+			
+</div>
