@@ -2,21 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Awesome TMDB App</title>
+<title>Awesome TMDB API Programming Test</title>
 
 <!-- Default Styles (DO NOT TOUCH) -->
 <link rel="stylesheet" type="text/css" href="/css/app.css">
 <!-- RequireJS // -->
 <script src="/vendor/requirejs/require.js" data-main="main"></script>
 <style type="text/css">
-			html
+		html
 			{
 			 font-size: 14px;
 			}
 			body{
 				padding-top: 70px;
 			}
-
 			/* the height of the header decides when to use the window scroll jquery function to start sticking the searchbox */
 			.header
 			{
@@ -29,13 +28,12 @@
 			 width: 100%;
 			}
 
-		</style>
+</style>
 </head>
 <body>
 	<div class="wrapper">
-		<awesome-search/>
+		<ng-view></ng-view>
 	</div>
-
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 

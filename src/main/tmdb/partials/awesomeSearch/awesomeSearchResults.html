@@ -1,13 +1,13 @@
 <div class="awesome-search-results">
-<ul >
-		<li ng-repeat="result in resultList" class="col-md-4">
-			<img ng-src="{{view.images}}{{result.image}}"
-			title="{{result.title}} as {{result.character}}" width="65" height="97"
-			ng-if="result.image" />
-			<span class="badge">{{result.media_type}}</span>
-			<a href="">{{result.name || result.title}}</a>
-		</li>	
-		
-</ul>
-
+	<div class="container">
+				<div ng-repeat="result in resultList" class="col-xs-3">
+					<img ng-src="{{view.images}}{{result.image}}"
+					title="{{result.title}} as {{result.character}}" width="65" height="97"
+					ng-if="result.image" />
+					<span class="badge">{{result.media_type}}</span>
+					<span>
+						<a href="/#/movie/{{result.id}}" style="font-size:8pt">{{result.name || result.title}}</a>
+					</span>
+				</div>	
+    </div>
 </div>

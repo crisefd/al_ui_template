@@ -1,65 +1,118 @@
 /**
- * the controller needs to be loaded explicitly with requireJS as the normal application only registers the
- * controllers inside the route definitions, which are not evaluated during testing, so they are not known to angularJS
- */
-define(['angular',
-    'config/config',
-    'tmdb/partials/awesomeSearch/AwesomeSearchController'
-  ],
-  function(angular, config, AwesomeSearchController) {
-    "use strict";
-    describe("the awesomesearchcontroller", function() {
-      var awesomesearchcontroller, scope, mockService;
+* Test the AwesomeSearchController
+*/
+define([ 'angular',
+         'config/config',
+         'tmdb/partials/awesomeSearch/AwesomeSearchController'], 
+    function( angular, config, AwesomeSearchController) {
+        "use strict";
+        describe("test suite for AwesomeSearchController", function () {
+            var awesomeSearchController, scope, mockService, q;
 
-      beforeEach(function() {
-        /**
-         * Load the required modules
-         */
-        module("config");
-        module("ngRoute");
+            beforeEach(function () {
+                /**
+                * Load the required modules
+                */
+                module("config");
+                module("ngRoute");
+                /**
+                * Injection
+                */
+                inject(["$rootScope", "$controller", "$q", function ($rootScope, $controller, $q) {
+                    //instantiate the controller with a newly created scope
+                    scope       = $rootScope.$new();
 
-        /**
-         * Injection
-         */
-        inject(["$rootScope", "$controller", function($rootScope, $controller) {
-          //instantiate the controller with a newly created scope
-          scope = $rootScope.$new();
-          mockService = {
-            Search: function() {
-              return {
-                search: {
-                  multi: function() {
-                    return {
-                      then: function() {
-                        return {};
-                      }
+                    mockService = {
+                        Person: function () {
+                            return {
+                                person: {
+                                    person: function () {
+                                        return $q.when({data:readJSON('src/main/mocks/data/person/person-aniston.json')});
+                                    }
+                                }
+                            };
+                        },
+                        Search: function () {
+                            return {
+                                search: {
+                                    multi: function (data) {
+                                        if (data === "aniston"){
+                                            return $q.when({
+                                                data:{
+                                                    results:readJSON('src/main/mocks/data/movie/search-multi-person.json')
+                                                }
+                                            });
+                                        } else {
+                                            return $q.when({
+                                                data:{
+                                                    results:readJSON('src/main/mocks/data/movie/search-multi.json')
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            };
+                        }
                     };
-                  }
-                }
-              };
-            }
-          };
-          awesomesearchcontroller = $controller(
-            AwesomeSearchController, {
-              $scope: scope,
-              TMDBAPIService: mockService
-            }
-          );
-        }]);
-      });
 
-      /*
-       * Test default initialization variables
-       */
-      it("should have matching defaults", function() {
-        expect(scope.view.searchPhrase).toBe("");
-        expect(scope.view.resultList).toEqual([]);
-      });
+                    awesomeSearchController = $controller(AwesomeSearchController, {$scope:scope, 
+                                                                  TMDBAPIService: mockService});
+                }]);
+            });
 
-      /*
-       * Test base functionality
-       */
+            /*
+            * Test default initialization variables
+            */
+            it("should always searchPhrase start empty", function () {
+                expect(scope.searchPhrase).toEqual("");
+            });
 
-    });
-  }
+            it("should always timeout to be greater than 250", function () {
+                expect(awesomeSearchController.timeWatcher).toBeGreaterThan(250);
+            });
+
+            it("should search results not be empty after hits enter key", function () {
+            	scope.$apply();
+            	scope.searchPhrase = "a";
+            	scope.$apply();
+            	scope.searchPhrase = "ava";
+            	scope.$apply();
+            	scope.searchPhrase = "avatar";
+            	scope.$apply();
+
+            	//The user types the movie name and hits enter
+            	
+            	var mockEvent = {
+            		which: 13
+            	};
+            	scope.performSearch(mockEvent);
+
+            	scope.$apply();
+
+                expect(scope.view.resultList).toBeDefined();
+            });
+
+            it("should search results should bring person data", function () {
+                scope.$apply();
+                scope.searchPhrase = "aniston";
+                scope.$apply();
+
+                //The user types the movie name and hits enter
+                var mockEvent = {
+                    which: 13
+                };
+
+                scope.performSearch(mockEvent);
+
+                scope.$apply();
+
+                expect(scope.view.resultList[0].name).toBe('Jennifer Aniston');
+                expect(scope.view.resultList[0].popularity).toBe(10.830772);
+                expect(scope.view.resultList[0].media_type).toBe('person');
+                expect(scope.view.resultList[0].foto).toBe('/4d4wvNyDuvN86DoneawbLOpr8gH.jpg');
+                
+            });
+
+        });
+    }
 );
